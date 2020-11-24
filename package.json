@@ -3,22 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "tsc",
     "dev": "next dev",
     "build": "next build",
-    "start": "next dev -p $PORT"
+    "start": "next start"
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "date-fns": "^2.16.1",
-    "gray-matter": "^4.0.2",
     "mongodb": "^3.5.9",
     "mongodb-core": "^3.2.7",
     "next": "^10.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "remark": "^13.0.0",
-    "remark-html": "^13.0.1",
     "sweetalert2": "^10.10.1"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import Layout from '../../../components/layout';
 import { getAllPostIds, getPostData } from '../../../lib/posts';
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 import utilStyles from '../../../styles/utils.module.css';
 import Head from 'next/head';
 import updateStyles from './updateStyles.module.css';
@@ -72,7 +73,7 @@ export default function Editor({ postData }) {
 				      </div>
 				    </div>
 				    <div className={ updateStyles.row }>
-				      <input className={ updateStyles.inputComponent } className={ updateStyles.submitButton } type="submit" value="Update" onClick={ updatePost } />
+				      <input className={ updateStyles.submitButton } type="submit" value="Update" onClick={ updatePost } />
 				    </div>
 				  </form>
 				</div>

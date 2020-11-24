@@ -3,21 +3,34 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
 import Link from 'next/link';
-// import Date from '../components/date';
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 import styles from '../components/layout.module.css';
 import updateStyles from './posts/update/updateStyles.module.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import React from 'react';
 
 
-const DeleteButton = React.forwardRef(({ onClick, href }, ref) => {
 
-  var onClick = (event) => {
 
+export default function Home({ allPostsData } :
+                             { allPostsData : {
+                               date: string,
+                               title: string,
+                               id: string,  
+                             }[]
+                            }) {
+
+  // Handle functions here...
+  function createPost(event) {
+    event.preventDefault();
+    window.location.href = '/posts/create';  
+  }
+
+  function deletePost(event) {
     event.preventDefault();
     var postElement = event.target.closest('li');
-    var postId = href.replace('/','');
+    var postId = '30';
 
     Swal.fire({
       title: '🗑 Are you sure?',
@@ -40,38 +53,6 @@ const DeleteButton = React.forwardRef(({ onClick, href }, ref) => {
         });     
       } 
     });
-  };
-
-  return (
-    <a href={href} onClick={onClick} ref={ref} className={styles.dangerousAction}>
-      🗑 Delete 
-    </a>
-  );
-});
-
-
-const UpdateButton = React.forwardRef(({ onClick, href }, ref) => {
-
-  return (
-    <a href={href} onClick={onClick} ref={ref}>
-      ✎ Update 
-    </a>
-  );
-});
-
-
-export default function Home({ allPostsData } :
-                             { allPostsData : {
-                               date: string,
-                               title: string,
-                               id: string,  
-                             }[]
-                            }) {
-
-  // Handle functions here...
-  function createPost(event) {
-    event.preventDefault();
-    window.location.href = '/posts/create';  
   }
 
   return (
@@ -94,16 +75,8 @@ export default function Home({ allPostsData } :
                  <small className={utilStyles.lightText}>
                    By {date}
                  </small>
-                <div className={styles.actionLink}>
-                  <Link href={`/posts/update/${id}`} passHref>
-                    <UpdateButton />
-                  </Link>
-                </div>
-               <div className={styles.actionLink}>
-                  <Link href={`/${id}`} passHref>
-                    <DeleteButton />
-                  </Link>
-                </div>
+                 <div className={styles.actionLink}>
+                 </div>
              </li>
            ))}
          </ul>

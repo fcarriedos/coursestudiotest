@@ -1,5 +1,5 @@
 import Layout from '../../components/layout';
-import { Editor } from './update/[id]';
+// import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
 import Head from 'next/head';
@@ -89,23 +89,23 @@ export default function Creator({ postData }) {
 }
 
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	// Return a list of possible value for id
-	const paths = await getAllPostIds();
-	return {
-		paths,
-		fallback: false
-	};
-}
+// export const getStaticPaths: GetStaticPaths = async () => {
+// 	// Return a list of possible value for id
+// 	const paths = await getAllPostIds();
+// 	return {
+// 		paths,
+// 		fallback: false
+// 	};
+// }
 
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	// Fetch necessary data for the blog post using params.id
-	const postData = {};
-	return {
-		props: {
-			postData // Formerly getting post info from here
-		}
-	};
-}
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+// 	// Fetch necessary data for the blog post using params.id
+// 	const postData = {};
+// 	return {
+// 		props: {
+// 			postData // Formerly getting post info from here
+// 		}
+// 	};
+// }
 

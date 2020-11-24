@@ -39,7 +39,7 @@ export async function getAllPostIds() {
 }
 
 
-export async function getPostData(id: number) {
+export async function getPostData(id: string) {
 
   console.log('getPostData(): looking for post ' + id);
 
