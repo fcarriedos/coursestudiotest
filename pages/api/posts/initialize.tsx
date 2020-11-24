@@ -4,6 +4,7 @@ import axios from 'axios';
 
 // TODO: this as an environment variable
 const USERS_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
+const POSTS_ENDPOINT = 'https://jsonplaceholder.typicode.com/posts';
 
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,6 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	var postsInitalized = await initializePosts(db);
 	var usersInitalized = await initializeUsers(db);
 	if (postsInitalized && usersInitalized) {
+  // if (usersInitalized) {
 		res.json({ status: 'OK' });
 		return;
 	} 	
@@ -21,17 +23,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 
 async function initializePosts(db) {
+
+  try {
+    await db.collection('posts').find();
+  } catch(e) {}
 	
 	try {
-		await db.collection('posts').drop();
-		while (allPosts.length > 0) {
-			const postBatch = allPosts.splice(0, 10);
-			// console.log('postBatch: ' + JSON.stringify(postBatch, null, 2));
-			const insertionResult = await db.collection('posts')
-			      							.insertMany(postBatch);
-			// console.log('Insertion result: ' + JSON.stringify(insertionResult, null, 2));
-		}
-		return true;
+    var existingPosts = await axios.get(POSTS_ENDPOINT);
+    // console.log('postBatch: ' + JSON.stringify(existingPosts.data, null, 2));
+		// while (allPosts.length > 0) {
+		// 	const postBatch = allPosts.splice(0, 10);
+		// 	// console.log('postBatch: ' + JSON.stringify(postBatch, null, 2));
+		// 	const insertionResult = await db.collection('posts')
+		// 	      							.insertMany(postBatch);
+		// 	// console.log('Insertion result: ' + JSON.stringify(insertionResult, null, 2));
+		// }
+		// return true;
 	} catch(e) { 
 		console.error('initializePosts(): could not initialize post collection, error details: ' + e.stack); 
 	}
@@ -40,10 +47,13 @@ async function initializePosts(db) {
 
 
 async function initializeUsers(db) {
+
+  try {
+    await db.collection('users').drop();
+  } catch(e) {}
 	
 	try {
-		await db.collection('users').drop();
-		console.error('Dropping user collection at startup...');
+		console.log('Dropping user collection at startup...');
 		var existingUsers = await axios.get(USERS_ENDPOINT);
 
 		var userData = existingUsers.data;
@@ -51,8 +61,8 @@ async function initializeUsers(db) {
 
 		while (userData.length > 0) {
 			const userBatch = userData.splice(0, 10);
-			const insertionResult = await db.collection('users')
-			      .insertMany(userBatch);
+      console.log('initializeUsers(): inserting batch: ' + JSON.stringify(userBatch, null, 2));
+			const insertionResult = await db.collection('users').insertMany(userBatch);
 			// console.log('initializeUsers(): insertion result: ' + JSON.stringify(insertionResult, null, 2));
 		}
 		return true;

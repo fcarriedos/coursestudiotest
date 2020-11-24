@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 export default function Creator({ postData }) {
 
-	// console.log('PostData is: ' + JSON.stringify(postData, null, 2));
+	// console.log('Creator(): PostData is: ' + JSON.stringify(postData, null, 2));
 
 	const [ titleInput, titleSetInput ] = useState('');
 	const [ authorInput, postSetAuthor ] = useState('');
@@ -20,14 +20,13 @@ export default function Creator({ postData }) {
 	function createPost(event) {
 		event.preventDefault();
 
-		// TODO: Validation 
 		if (!titleInput || !authorInput || !postInput) {	
 			Swal.fire({ icon: 'info', title: 'Every story has to have some ' + (!titleInput ? 'title' : ((!authorInput ? 'author' : ' text '))) + '...' });
 			return;
 		}
 
-        // Update the post from DB
-        console.log('Saving the post ');
+        // Create the post from DB
+        console.log('Creator(): Saving the post ');
         axios.post('/api/posts/create', {
         	user: authorInput,
         	title: titleInput,
@@ -101,11 +100,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	// Fetch necessary data for the blot post using params.id
+	// Fetch necessary data for the blog post using params.id
 	const postData = {};
 	return {
 		props: {
-			postData
+			postData // Formerly getting post info from here
 		}
 	};
 }
