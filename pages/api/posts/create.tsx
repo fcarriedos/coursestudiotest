@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	const { db } = await connectToDatabase();
 
-	console.log('/api/posts/create: updating post id=' + req.body.id + ' with title ' + req.body.title + ' with body ' + req.body.post);
+	console.log('/api/posts/create: creating post for user ' + req.body.user + ' with title ' + req.body.title + ' with body ' + req.body.post);
 	
 	try {
 
@@ -18,6 +18,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		if (!user) {
 			user = await createUser(req.body.user);
 		}
+
+		console.log('User id is ' + user.id);
 
 		const insertionResult = await db.collection('posts').insertOne({ id: postId, userId: user.id, title: req.body.title.toLowerCase(), body: req.body.post });
 
