@@ -8,9 +8,6 @@ import styles from '../components/layout.module.css';
 import updateStyles from './posts/update/updateStyles.module.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import React from 'react';
-
-
 
 
 export default function Home({ allPostsData } :
@@ -29,9 +26,9 @@ export default function Home({ allPostsData } :
 
   function deletePost(event) {
     event.preventDefault();
+    var postId = event.target.id;
     var postElement = event.target.closest('li');
-    var postId = '30';
-
+    
     Swal.fire({
       title: '🗑 Are you sure?',
       html: 'This cannot be undone!',
@@ -76,6 +73,8 @@ export default function Home({ allPostsData } :
                    By {date}
                  </small>
                  <div className={styles.actionLink}>
+                   <a className={ updateStyles.updateLink } href={`/posts/update/${id}`}>✎ Update</a>
+                   <a className={ updateStyles.deleteLink } id={id} onClick={ deletePost }>🗑 Delete</a>
                  </div>
              </li>
            ))}

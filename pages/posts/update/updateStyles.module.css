@@ -68,6 +68,19 @@
 }
 
 
+.updateLink {
+  padding: 5px;
+  font-size: .8em;
+}
+
+.deleteLink {
+  padding: 5px;
+  color: #ff7b7b;
+  font-size: .8em;
+}
+
+
+
 .createPostButton {
   background-color: #60a9ff;
   color: white;
