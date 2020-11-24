@@ -17,7 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		res.json({ status: 'OK' });
 		return;
 	} 	
-	res.status(500).send();
+	res.status(500).send({});
 }
 
 
