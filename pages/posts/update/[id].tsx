@@ -1,6 +1,6 @@
 import Layout from '../../../components/layout';
 import { getAllPostIds, getPostData } from '../../../lib/posts';
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
+import { GetServerSideProps } from 'next';
 import utilStyles from '../../../styles/utils.module.css';
 import Head from 'next/head';
 import updateStyles from './updateStyles.module.css';
@@ -83,17 +83,7 @@ export default function Editor({ postData }) {
 }
 
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	// Return a list of possible value for id
-	const paths = await getAllPostIds();
-	return {
-		paths,
-		fallback: false
-	};
-}
-
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	// Fetch necessary data for the blot post using params.id
 	const postData = await getPostData(params.id as string);
 	return {
