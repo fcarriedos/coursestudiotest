@@ -87,7 +87,7 @@ export default function Home({ allPostsData } :
                    By {date}
                  </small>
                 <div className={styles.actionLink}>
-                  <Link href={`/${id}`} passHref>
+                  <Link href={`/posts/update/${id}`} passHref>
                     <UpdateButton />
                   </Link>
                 </div>

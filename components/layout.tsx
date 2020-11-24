@@ -4,7 +4,7 @@ import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 
 
-const name = 'Francisco Carriedo';
+const name = 'Francisco\'s selection';
 export const siteTitle = 'Next.js Sample Website';
 
 export default function Layout({ children, home }: 
@@ -14,8 +14,9 @@ export default function Layout({ children, home }:
 		<div className={ styles.container }>
 			<Head>
 				<link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="description"
-					  content="Learn how to build a personal website using Next.js" />
+					  content="Francisco Carriedo blog post selection" />
 				<meta
 				property="og:image"
 				content={`https://og-image.now.sh/${encodeURI(
