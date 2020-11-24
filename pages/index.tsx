@@ -10,7 +10,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 
-const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+const DeleteButton = React.forwardRef(({ onClick, href }, ref) => {
 
   var onClick = (event) => {
 
@@ -42,8 +42,18 @@ const MyButton = React.forwardRef(({ onClick, href }, ref) => {
   };
 
   return (
+    <a href={href} onClick={onClick} ref={ref} className={styles.dangerousAction}>
+      🗑 Delete 
+    </a>
+  );
+});
+
+
+const UpdateButton = React.forwardRef(({ onClick, href }, ref) => {
+
+  return (
     <a href={href} onClick={onClick} ref={ref}>
-      🗑 Delete
+      ✎ Update 
     </a>
   );
 });
@@ -76,10 +86,15 @@ export default function Home({ allPostsData } :
                  <small className={utilStyles.lightText}>
                    By {date}
                  </small>
-               <div className={styles.deleteButton}>
-                <Link href={`/${id}`} passHref>
-                  <MyButton />
-                </Link>
+                <div className={styles.actionLink}>
+                  <Link href={`/${id}`} passHref>
+                    <UpdateButton />
+                  </Link>
+                </div>
+               <div className={styles.actionLink}>
+                  <Link href={`/${id}`} passHref>
+                    <DeleteButton />
+                  </Link>
                 </div>
              </li>
            ))}
