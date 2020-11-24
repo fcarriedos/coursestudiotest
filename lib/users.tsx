@@ -28,7 +28,7 @@ export async function createUser(name: string) {
 	const { db } = await connectToDatabase();
 	const userId = await getNextUserId();
 	const userInsertionResult = await db.collection('users').insert({ id: userId, name: name });
-	console.log('createUser: ' + JSON.stringify(userInsertionResult, null, 2));
+	// console.log('createUser: ' + JSON.stringify(userInsertionResult, null, 2));
 	return userInsertionResult.ops[0];	
 }
 
