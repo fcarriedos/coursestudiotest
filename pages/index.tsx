@@ -90,7 +90,7 @@ export default function Home({ allPostsData } :
 
 
 // These two methods only execute on the server side
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetStaticProps = async () => {
 
   const allPostsData = await getSortedPostsData(); 
 
