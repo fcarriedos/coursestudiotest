@@ -21,14 +21,14 @@ export default function Post({ postData } :
 			<Head>
 				<title>{ postData.title }</title>
 			</Head>
-			<article>
-				<h1 className={ utilStyles.headingX1 }>{ postData.title }</h1>
-				<div className={ utilStyles.lightText }>
-					{ postData.author }
-				</div>		
-				<div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-			</article>
-		</Layout>
+				<article>
+					<h1 className={ utilStyles.headingX1 }>{ postData.title }</h1>
+					<div className={ utilStyles.lightText }>
+						{ postData.author }
+					</div>		
+					<div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+				</article>
+			</Layout>
 	);
 }
 

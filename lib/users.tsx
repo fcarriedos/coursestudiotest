@@ -1,12 +1,18 @@
 import { connectToDatabase } from "./mongodb";
 
 
+const localUserCache = {};
+
+
 export async function getUserDetails(userId: string) {
 
-	const { db } = await connectToDatabase();
-	const user = await db.collection('users').findOne({ id: userId }, { projection: { name: 1 } });
-	// console.log('getUserDetails: ' + JSON.stringify(user, null, 2));
-	return user;
+	if (!localUserCache[userId]) {
+		const { db } = await connectToDatabase();
+		const user = await db.collection('users').findOne({ id: userId });
+		// console.log('getUserDetails: ' + JSON.stringify(user, null, 2));
+		localUserCache[userId] = user;
+	}
+	return localUserCache[userId];
 }
 
 
