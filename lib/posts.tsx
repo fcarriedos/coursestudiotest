@@ -29,6 +29,10 @@ export async function getSortedPostsData() {
   var allPostsData = [];
   for (let post of allPostFromDB) {
     var userDetails = await getUserDetails(post.userId);
+    if (!userDetails) {
+      console.log('-----------> User details null for ' + JSON.stringify(post, null, 2));
+      continue;
+    }
     allPostsData.push({
       id: Number(post.id),
       date: userDetails.name,

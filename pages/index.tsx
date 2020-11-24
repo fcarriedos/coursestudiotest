@@ -6,6 +6,7 @@ import Link from 'next/link';
 // import Date from '../components/date';
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 import styles from '../components/layout.module.css';
+import updateStyles from './posts/update/updateStyles.module.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -66,6 +67,13 @@ export default function Home({ allPostsData } :
                                id: string,  
                              }[]
                             }) {
+
+  // Handle functions here...
+  function createPost(event) {
+    event.preventDefault();
+    window.location.href = '/posts/create';  
+  }
+
   return (
      <Layout home>
        <Head>
@@ -99,6 +107,9 @@ export default function Home({ allPostsData } :
              </li>
            ))}
          </ul>
+         <div className={ updateStyles.row }>
+           <input className={ updateStyles.createPostButton } type="submit" value="Create post" onClick={ createPost } />
+         </div>
        </section>
      </Layout>
   );
@@ -106,7 +117,6 @@ export default function Home({ allPostsData } :
 
 
 // These two methods only execute on the server side
-// export async function getStaticProps() {
 export const getStaticProps: GetStaticProps = async () => {
 
   const allPostsData = await getSortedPostsData(); 

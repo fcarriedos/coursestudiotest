@@ -16,6 +16,31 @@ export async function getUserDetails(userId: string) {
 }
 
 
+export async function getUserByName(name: string) {
+	const { db } = await connectToDatabase();
+	const user = await db.collection('users').findOne({ name: name });
+	// console.log('getUserByName: ' + JSON.stringify(user, null, 2));
+	return user;	
+}
+
+
+export async function createUser(name: string) {
+	const { db } = await connectToDatabase();
+	const userId = await getNextUserId();
+	const userInsertionResult = await db.collection('users').insert({ id: userId, name: name });
+	// console.log('createUser: ' + JSON.stringify(userInsertionResult, null, 2));
+	return userInsertionResult;	
+}
+
+
+async function getNextUserId() {
+	const { db } = await connectToDatabase();
+	const highestIdResult = await db.collection('users').find({}).project({ id: 1 }).sort({ id: -1 }).limit(1).toArray();
+	const highestId = highestIdResult[0].id;
+	// console.log('getNextUserId ' + highestId);
+	return highestId + 1;
+}
+
 
 
 

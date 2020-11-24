@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 
 const name = 'Francisco\'s selection';
-export const siteTitle = 'Next.js Sample Website';
+export const siteTitle = 'Francisco\'s post selection';
 
 export default function Layout({ children, home }: 
                                { children: React.ReactNode,
